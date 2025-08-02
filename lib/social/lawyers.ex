@@ -18,7 +18,7 @@ defmodule Social.Lawyers do
 
   """
   def list_lawyers do
-    Repo.all(Lawyer)
+    Lawyer |> Repo.all() |> Repo.preload(:firm)
   end
 
   @doc """
@@ -35,7 +35,9 @@ defmodule Social.Lawyers do
       ** (Ecto.NoResultsError)
 
   """
-  def get_lawyer!(id), do: Repo.get!(Lawyer, id)
+  def get_lawyer!(id) do
+    Lawyer |> Repo.get!(id) |> Repo.preload(:firm)
+  end
 
   @doc """
   Creates a lawyer.

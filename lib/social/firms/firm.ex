@@ -26,5 +26,7 @@ defmodule Social.Firms.Firm do
     |> validate_phone_number(:phone)
     |> validate_url(:logo)
     |> validate_url(:website)
+    |> unique_constraint(:email)
+    |> unique_constraint(:phone)
   end
 end

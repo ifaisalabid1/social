@@ -25,7 +25,8 @@ defmodule SocialWeb.LawyerJSON do
       is_featured: lawyer.is_featured,
       email: lawyer.email,
       phone: lawyer.phone,
-      year_of_experience: lawyer.year_of_experience
+      year_of_experience: lawyer.year_of_experience,
+      firm: lawyer.firm && lawyer.firm.name
     }
   end
 end

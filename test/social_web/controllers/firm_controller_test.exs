@@ -23,7 +23,15 @@ defmodule SocialWeb.FirmControllerTest do
     email: "some updated email",
     phone: "some updated phone"
   }
-  @invalid_attrs %{name: nil, about: nil, logo: nil, website: nil, is_featured: nil, email: nil, phone: nil}
+  @invalid_attrs %{
+    name: nil,
+    about: nil,
+    logo: nil,
+    website: nil,
+    is_featured: nil,
+    email: nil,
+    phone: nil
+  }
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -31,17 +39,17 @@ defmodule SocialWeb.FirmControllerTest do
 
   describe "index" do
     test "lists all firms", %{conn: conn} do
-      conn = get(conn, ~p"/api/firms")
+      conn = get(conn, ~p"/api/law-firms")
       assert json_response(conn, 200)["data"] == []
     end
   end
 
   describe "create firm" do
     test "renders firm when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/api/firms", firm: @create_attrs)
+      conn = post(conn, ~p"/api/law-firms", firm: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get(conn, ~p"/api/firms/#{id}")
+      conn = get(conn, ~p"/api/law-firms/#{id}")
 
       assert %{
                "id" => ^id,
@@ -56,7 +64,7 @@ defmodule SocialWeb.FirmControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, ~p"/api/firms", firm: @invalid_attrs)
+      conn = post(conn, ~p"/api/law-firms", firm: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -65,10 +73,10 @@ defmodule SocialWeb.FirmControllerTest do
     setup [:create_firm]
 
     test "renders firm when data is valid", %{conn: conn, firm: %Firm{id: id} = firm} do
-      conn = put(conn, ~p"/api/firms/#{firm}", firm: @update_attrs)
+      conn = put(conn, ~p"/api/law-firms/#{firm}", firm: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get(conn, ~p"/api/firms/#{id}")
+      conn = get(conn, ~p"/api/law-firms/#{id}")
 
       assert %{
                "id" => ^id,
@@ -83,7 +91,7 @@ defmodule SocialWeb.FirmControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, firm: firm} do
-      conn = put(conn, ~p"/api/firms/#{firm}", firm: @invalid_attrs)
+      conn = put(conn, ~p"/api/law-firms/#{firm}", firm: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -92,11 +100,11 @@ defmodule SocialWeb.FirmControllerTest do
     setup [:create_firm]
 
     test "deletes chosen firm", %{conn: conn, firm: firm} do
-      conn = delete(conn, ~p"/api/firms/#{firm}")
+      conn = delete(conn, ~p"/api/law-firms/#{firm}")
       assert response(conn, 204)
 
       assert_error_sent 404, fn ->
-        get(conn, ~p"/api/firms/#{firm}")
+        get(conn, ~p"/api/law-firms/#{firm}")
       end
     end
   end

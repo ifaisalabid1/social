@@ -15,7 +15,7 @@ defmodule SocialWeb.FirmController do
     with {:ok, %Firm{} = firm} <- Firms.create_firm(firm_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/firms/#{firm}")
+      |> put_resp_header("location", ~p"/api/law-firms/#{firm}")
       |> render(:show, firm: firm)
     end
   end

@@ -8,7 +8,7 @@ defmodule SocialWeb.Router do
   scope "/api", SocialWeb do
     pipe_through :api
 
-    resources "/firms", FirmController, except: [:new, :edit]
+    resources "/law-firms", FirmController, except: [:new, :edit]
     resources "/lawyers", LawyerController, except: [:new, :edit]
   end
 

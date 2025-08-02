@@ -17,5 +17,7 @@ defmodule Social.Repo.Migrations.CreateLawyers do
     end
 
     create index(:lawyers, [:firm_id])
+    create unique_index(:lawyers, [:email])
+    create unique_index(:lawyers, [:phone])
   end
 end

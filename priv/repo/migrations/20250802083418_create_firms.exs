@@ -13,5 +13,8 @@ defmodule Social.Repo.Migrations.CreateFirms do
 
       timestamps(type: :utc_datetime)
     end
+
+    create unique_index(:firms, [:email])
+    create unique_index(:firms, [:phone])
   end
 end
