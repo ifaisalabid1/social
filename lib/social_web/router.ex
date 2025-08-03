@@ -10,6 +10,7 @@ defmodule SocialWeb.Router do
 
     resources "/law-firms", FirmController, except: [:new, :edit]
     resources "/lawyers", LawyerController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
